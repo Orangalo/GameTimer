@@ -9,10 +9,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var inputOutlet: UITextField!
     @IBOutlet weak var blackLabel: UILabel!
     @IBOutlet weak var whiteLabel: UILabel!
-    
-    let totalTime: Int = 5
     
     var blackSeconds: Int = 0
     var whiteSeconds: Int = 0
@@ -23,10 +22,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        blackSeconds = totalTime
-        whiteSeconds = totalTime
         blackLabel.text = formatTime(time: blackSeconds)
         whiteLabel.text = formatTime(time: whiteSeconds)
+        inputOutlet.attributedPlaceholder = NSAttributedString(string: "Enter number of seconds",
+                                                               attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,7 +34,27 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startGame(_ sender: UIButton) {
+        var totalTime: Int
+        
+        // Default time 600s
+        if (inputOutlet.text != "") {
+            totalTime = Int(inputOutlet.text!)!
+        } else {
+            totalTime = 600
+        }
+        
+        // Update times and labels
+        blackSeconds = totalTime
+        whiteSeconds = totalTime
+        
+        blackLabel.text = formatTime(time: blackSeconds)
+        whiteLabel.text = formatTime(time: whiteSeconds)
+        
+        // Hide UI elements and keyboard
         sender.isHidden = true
+        inputOutlet.isHidden = true
+        self.view.endEditing(true)
+        
         runWhiteTimer()
     }
     
@@ -67,8 +86,7 @@ class ViewController: UIViewController {
         blackLabel.text = f
         if f == "0:0" {
             blackTimer.invalidate()
-            let msg = UIAlertController(title: "Black lost!", message: "Black has lost the game.", preferredStyle: .alert)
-            self.present(msg, animated: true, completion: nil)
+            alert(title: "Black lost!", msg: "Black has lost the game.")
         }
     }
     
@@ -78,8 +96,7 @@ class ViewController: UIViewController {
         whiteLabel.text = f
         if f == "0:0" {
             whiteTimer.invalidate()
-            let msg = UIAlertController(title: "White lost!", message: "White has lost the game.", preferredStyle: .alert)
-            self.present(msg, animated: true, completion: nil)
+            alert(title: "White lost!", msg: "White has lost the game.")
         }
     }
     
@@ -88,6 +105,11 @@ class ViewController: UIViewController {
         let sec: Int = time - (min * 60)
         
         return "\(min):\(sec)"
+    }
+    
+    func alert(title: String, msg: String) {
+        let msg = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        self.present(msg, animated: true, completion: nil)
     }
 }
 
