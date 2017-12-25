@@ -13,6 +13,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var blackLabel: UILabel!
     @IBOutlet weak var whiteLabel: UILabel!
     
+    @IBOutlet weak var blackStartsLabel: UILabel!
+    @IBOutlet weak var whoStarts: UISwitch!
+    
     var blackSeconds: Int = 0
     var whiteSeconds: Int = 0
     
@@ -53,9 +56,16 @@ class ViewController: UIViewController {
         // Hide UI elements and keyboard
         sender.isHidden = true
         inputOutlet.isHidden = true
+        whoStarts.isHidden = true
+        blackStartsLabel.isHidden = true
+        
         self.view.endEditing(true)
         
-        runWhiteTimer()
+        if whoStarts.isOn {
+            runBlackTimer()
+        } else {
+            runWhiteTimer()
+        }
     }
     
     @IBAction func blackPlayerButton(_ sender: UIButton) {
