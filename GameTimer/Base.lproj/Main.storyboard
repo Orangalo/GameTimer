@@ -65,10 +65,10 @@
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </segmentedControl>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQK-KM-wZc" userLabel="Start Button">
-                                <rect key="frame" x="214" y="65" width="62" height="14"/>
+                                <rect key="frame" x="173" y="56" width="103" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <state key="normal" title="START">
+                                <state key="normal" title="START GAME">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -82,6 +82,7 @@
                     <connections>
                         <outlet property="blackLabel" destination="cV0-4u-bzL" id="1aT-4J-Bou"/>
                         <outlet property="inputOutlet" destination="swD-H9-Da6" id="II5-FO-V3R"/>
+                        <outlet property="startGameButton" destination="OQK-KM-wZc" id="TnR-nt-0yk"/>
                         <outlet property="whiteLabel" destination="iaQ-5D-iHk" id="Qv1-6W-Hf3"/>
                         <outlet property="whiteOrBlack" destination="Tbj-eV-D7v" id="zQy-Np-yRB"/>
                     </connections>
