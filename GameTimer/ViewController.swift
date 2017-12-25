@@ -118,7 +118,7 @@ class ViewController: UIViewController {
     
     func alert(title: String, msg: String) -> Void {
         let msg = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-        let resetButton = UIAlertAction(title: "Reset", style: UIAlertActionStyle.default) {
+        let resetButton = UIAlertAction(title: "Reset", style: .default) {
             UIAlertAction in
             self.resetGame()
         }
