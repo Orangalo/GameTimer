@@ -13,8 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var blackLabel: UILabel!
     @IBOutlet weak var whiteLabel: UILabel!
     
-    @IBOutlet weak var blackStartsLabel: UILabel!
-    @IBOutlet weak var whoStarts: UISwitch!
+    @IBOutlet weak var whiteOrBlack: UISegmentedControl!
     
     var blackSeconds: Int = 0
     var whiteSeconds: Int = 0
@@ -56,15 +55,13 @@ class ViewController: UIViewController {
         // Hide UI elements and keyboard
         sender.isHidden = true
         inputOutlet.isHidden = true
-        whoStarts.isHidden = true
-        blackStartsLabel.isHidden = true
-        
+        whiteOrBlack.isHidden = true
         self.view.endEditing(true)
         
-        if whoStarts.isOn {
-            runBlackTimer()
-        } else {
+        if whiteOrBlack.selectedSegmentIndex == 0 {
             runWhiteTimer()
+        } else {
+            runBlackTimer()
         }
     }
     
