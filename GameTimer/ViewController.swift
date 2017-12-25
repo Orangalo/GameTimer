@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     @IBOutlet weak var inputOutlet: UITextField!
@@ -122,9 +123,11 @@ class ViewController: UIViewController {
             UIAlertAction in
             self.resetGame()
         }
-        
         msg.addAction(resetButton)
         self.present(msg, animated: true, completion: nil)
+        
+        AudioServicesPlaySystemSound(4095) // Vibrate
+        AudioServicesPlaySystemSound(1022) // Play sound
     }
     
     func resetGame() -> Void {
