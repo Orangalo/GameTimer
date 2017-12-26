@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         var totalTime: Int
         
         // Default time 600s
-        if (inputOutlet.text != "") {
+        if (inputOutlet.text != "" && (Int(inputOutlet.text!) != nil)) {
             totalTime = Int(inputOutlet.text!)!
         } else {
             totalTime = 600
@@ -65,14 +65,18 @@ class ViewController: UIViewController {
         
         if whiteOrBlack.selectedSegmentIndex == 0 {
             runWhiteTimer()
+            blackLabel.alpha = 0.1
         } else {
             runBlackTimer()
+            whiteLabel.alpha = 0.1
         }
     }
     
     @IBAction func blackPlayerButton(_ sender: UIButton) {
         if blackTimer.isValid {
             blackTimer.invalidate()
+            blackLabel.alpha = 0.5
+            whiteLabel.alpha = 1
             runWhiteTimer()
         }
     }
@@ -80,6 +84,8 @@ class ViewController: UIViewController {
     @IBAction func whitePlayerButton(_ sender: UIButton) {
         if whiteTimer.isValid {
             whiteTimer.invalidate()
+            whiteLabel.alpha = 0.5
+            blackLabel.alpha = 1
             runBlackTimer()
         }
     }
@@ -94,21 +100,19 @@ class ViewController: UIViewController {
     
     @objc func updateBlackTimer() {
         blackSeconds -= 1
-        let f: String = formatTime(time: blackSeconds)
-        blackLabel.text = f
-        if f == "0:0" {
+        blackLabel.text = formatTime(time: blackSeconds)
+        if blackSeconds == 0 {
             blackTimer.invalidate()
-            alert(title: "Black lost!", msg: "Black has lost the game.")
+            alert(title: "Black lost!", text: "Black has lost the game.")
         }
     }
     
     @objc func updateWhiteTimer() {
         whiteSeconds -= 1
-        let f: String = formatTime(time: whiteSeconds)
-        whiteLabel.text = f
-        if f == "0:0" {
+        whiteLabel.text = formatTime(time: whiteSeconds)
+        if whiteSeconds == 0 {
             whiteTimer.invalidate()
-            alert(title: "White lost!", msg: "White has lost the game.")
+            alert(title: "White lost!", text: "White has lost the game.")
         }
     }
     
@@ -125,12 +129,12 @@ class ViewController: UIViewController {
         if (sec < 10) {
             secStr = "0" + secStr
         }
-        
+
         return minStr + ":" + secStr
     }
     
-    func alert(title: String, msg: String) {
-        let msg = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+    func alert(title: String, text: String) {
+        let msg = UIAlertController(title: title, message: text, preferredStyle: .alert)
         let resetButton = UIAlertAction(title: "Reset", style: .default) {
             UIAlertAction in
             self.resetGame()
@@ -147,7 +151,10 @@ class ViewController: UIViewController {
         inputOutlet.isHidden = false
         whiteOrBlack.isHidden = false
         
-        blackLabel.text = "0:0"
-        whiteLabel.text = "0:0"
+        blackLabel.text = "00:00"
+        whiteLabel.text = "00:00"
+        
+        blackLabel.alpha = 1
+        whiteLabel.alpha = 1
     }
 }
