@@ -29,8 +29,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         blackLabel.text = formatTime(time: blackSeconds)
         whiteLabel.text = formatTime(time: whiteSeconds)
-        inputOutlet.attributedPlaceholder = NSAttributedString(string: "Enter number of seconds",
-                                                               attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+        inputOutlet.attributedPlaceholder = NSAttributedString(
+            string: "Enter number of seconds",
+            attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray]
+        )
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,7 +40,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func startGame(_ sender: UIButton) -> Void {
+    @IBAction func startGame(_ sender: UIButton) {
         var totalTime: Int
         
         // Default time 600s
@@ -68,29 +70,29 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func blackPlayerButton(_ sender: UIButton) -> Void {
+    @IBAction func blackPlayerButton(_ sender: UIButton) {
         if blackTimer.isValid {
             blackTimer.invalidate()
             runWhiteTimer()
         }
     }
     
-    @IBAction func whitePlayerButton(_ sender: UIButton) -> Void {
+    @IBAction func whitePlayerButton(_ sender: UIButton) {
         if whiteTimer.isValid {
             whiteTimer.invalidate()
             runBlackTimer()
         }
     }
     
-    func runBlackTimer() -> Void {
+    func runBlackTimer() {
         blackTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(updateBlackTimer)), userInfo: nil, repeats: true)
     }
     
-    func runWhiteTimer() -> Void {
+    func runWhiteTimer() {
         whiteTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: (#selector(updateWhiteTimer)), userInfo: nil, repeats: true)
     }
     
-    @objc func updateBlackTimer() -> Void {
+    @objc func updateBlackTimer() {
         blackSeconds -= 1
         let f: String = formatTime(time: blackSeconds)
         blackLabel.text = f
@@ -100,7 +102,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func updateWhiteTimer() -> Void {
+    @objc func updateWhiteTimer() {
         whiteSeconds -= 1
         let f: String = formatTime(time: whiteSeconds)
         whiteLabel.text = f
@@ -111,13 +113,23 @@ class ViewController: UIViewController {
     }
     
     func formatTime(time: Int) -> String {
-        let min: Int = Int(floor(Double(time / 60)))
-        let sec: Int = time - (min * 60)
+        let min: Int = time / 60
+        let sec: Int = time % 60
         
-        return "\(min):\(sec)"
+        var minStr: String = "\(min)"
+        var secStr: String = "\(sec)"
+        
+        if (min < 10) {
+            minStr = "0" + minStr
+        }
+        if (sec < 10) {
+            secStr = "0" + secStr
+        }
+        
+        return minStr + ":" + secStr
     }
     
-    func alert(title: String, msg: String) -> Void {
+    func alert(title: String, msg: String) {
         let msg = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         let resetButton = UIAlertAction(title: "Reset", style: .default) {
             UIAlertAction in
@@ -130,7 +142,7 @@ class ViewController: UIViewController {
         AudioServicesPlaySystemSound(1022) // Play sound
     }
     
-    func resetGame() -> Void {
+    func resetGame() {
         startGameButton.isHidden = false
         inputOutlet.isHidden = false
         whiteOrBlack.isHidden = false
