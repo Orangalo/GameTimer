@@ -29,20 +29,25 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         blackLabel.text = formatTime(time: blackSeconds)
         whiteLabel.text = formatTime(time: whiteSeconds)
         inputOutlet.attributedPlaceholder = NSAttributedString(
             string: "Enter number of seconds",
             attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray]
         )
+    }
+    
+    override func viewDidLayoutSubviews() {
+        let width: CGFloat = self.view.frame.size.width
+        let height: CGFloat = self.view.frame.size.height
         
-        blurEffectViewForBlack.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width / 2, height: self.view.bounds.height)
+        blurEffectViewForBlack.frame = CGRect(x: 0, y: 0, width: width / 2, height: height)
         blurEffectViewForBlack.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectViewForBlack.alpha = 0.9
         blurEffectViewForBlack.isHidden = true
         
-        blurEffectViewForWhite.frame = CGRect(x: self.view.bounds.width / 2, y: 0, width: self.view.bounds.width / 2, height: self.view.bounds.height)
+        blurEffectViewForWhite.frame = CGRect(x: width / 2, y: 0, width: width / 2, height: self.view.bounds.height)
         blurEffectViewForWhite.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectViewForWhite.alpha = 0.9
         blurEffectViewForWhite.isHidden = true
@@ -53,7 +58,6 @@ class ViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func startGame(_ sender: UIButton) {
