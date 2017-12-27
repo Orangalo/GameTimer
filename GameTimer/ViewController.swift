@@ -24,6 +24,9 @@ class ViewController: UIViewController {
     var blackTimer: Timer = Timer()
     var whiteTimer: Timer = Timer()
     
+    let blurEffectViewForBlack = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    let blurEffectViewForWhite = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -33,6 +36,19 @@ class ViewController: UIViewController {
             string: "Enter number of seconds",
             attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray]
         )
+        
+        blurEffectViewForBlack.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width / 2, height: self.view.bounds.height)
+        blurEffectViewForBlack.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectViewForBlack.alpha = 0.9
+        blurEffectViewForBlack.isHidden = true
+        
+        blurEffectViewForWhite.frame = CGRect(x: self.view.bounds.width / 2, y: 0, width: self.view.bounds.width / 2, height: self.view.bounds.height)
+        blurEffectViewForWhite.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectViewForWhite.alpha = 0.9
+        blurEffectViewForWhite.isHidden = true
+        
+        view.addSubview(blurEffectViewForBlack)
+        view.addSubview(blurEffectViewForWhite)
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,18 +81,18 @@ class ViewController: UIViewController {
         
         if whiteOrBlack.selectedSegmentIndex == 0 {
             runWhiteTimer()
-            blackLabel.alpha = 0.1
+            blurEffectViewForBlack.isHidden = false
         } else {
             runBlackTimer()
-            whiteLabel.alpha = 0.1
+            blurEffectViewForWhite.isHidden = false
         }
     }
     
     @IBAction func blackPlayerButton(_ sender: UIButton) {
         if blackTimer.isValid {
             blackTimer.invalidate()
-            blackLabel.alpha = 0.5
-            whiteLabel.alpha = 1
+            blurEffectViewForBlack.isHidden = false
+            blurEffectViewForWhite.isHidden = true
             runWhiteTimer()
         }
     }
@@ -84,8 +100,8 @@ class ViewController: UIViewController {
     @IBAction func whitePlayerButton(_ sender: UIButton) {
         if whiteTimer.isValid {
             whiteTimer.invalidate()
-            whiteLabel.alpha = 0.5
-            blackLabel.alpha = 1
+            blurEffectViewForWhite.isHidden = false
+            blurEffectViewForBlack.isHidden = true
             runBlackTimer()
         }
     }
@@ -154,7 +170,7 @@ class ViewController: UIViewController {
         blackLabel.text = "00:00"
         whiteLabel.text = "00:00"
         
-        blackLabel.alpha = 1
-        whiteLabel.alpha = 1
+        blurEffectViewForWhite.isHidden = true
+        blurEffectViewForBlack.isHidden = true
     }
 }
