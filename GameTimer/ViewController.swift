@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     var whiteTimer: Timer = Timer()
     
     let blurEffectViewForBlack = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    let blurEffectViewForWhite = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    let blurEffectViewForWhite = UIVisualEffectView(effect: UIBlurEffect(style: .light))
 
     override func viewDidLoad() {
         super.viewDidLoad()
