@@ -24,8 +24,10 @@ class ViewController: UIViewController {
     var blackTimer: Timer = Timer()
     var whiteTimer: Timer = Timer()
     
-    let blurEffectViewForBlack = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
-    let blurEffectViewForWhite = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    
+    @IBOutlet weak var blurEffectViewForWhite: UIVisualEffectView!
+    @IBOutlet weak var blurEffectViewForBlack: UIVisualEffectView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,24 +39,24 @@ class ViewController: UIViewController {
             attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray]
         )
     }
-    
-    override func viewDidLayoutSubviews() {
-        let width: CGFloat = self.view.frame.size.width
-        let height: CGFloat = self.view.frame.size.height
-        
-        blurEffectViewForBlack.frame = CGRect(x: 0, y: 0, width: width / 2, height: height)
-        blurEffectViewForBlack.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectViewForBlack.alpha = 0.9
-        blurEffectViewForBlack.isHidden = true
-        
-        blurEffectViewForWhite.frame = CGRect(x: width / 2, y: 0, width: width / 2, height: self.view.bounds.height)
-        blurEffectViewForWhite.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectViewForWhite.alpha = 0.9
-        blurEffectViewForWhite.isHidden = true
-        
-        view.addSubview(blurEffectViewForBlack)
-        view.addSubview(blurEffectViewForWhite)
-    }
+//
+//    override func viewDidLayoutSubviews() {
+//        let width: CGFloat = self.view.frame.size.width
+//        let height: CGFloat = self.view.frame.size.height
+//
+//        blurEffectViewForBlack.frame = CGRect(x: 0, y: 0, width: width / 2, height: height)
+//        blurEffectViewForBlack.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        blurEffectViewForBlack.alpha = 0.9
+//        blurEffectViewForBlack.isHidden = true
+//
+//        blurEffectViewForWhite.frame = CGRect(x: width / 2, y: 0, width: width / 2, height: self.view.bounds.height)
+//        blurEffectViewForWhite.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        blurEffectViewForWhite.alpha = 0.9
+//        blurEffectViewForWhite.isHidden = true
+//
+//        view.addSubview(blurEffectViewForBlack)
+//        view.addSubview(blurEffectViewForWhite)
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
