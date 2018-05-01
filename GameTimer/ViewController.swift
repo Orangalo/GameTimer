@@ -24,11 +24,9 @@ class ViewController: UIViewController {
     var blackTimer: Timer = Timer()
     var whiteTimer: Timer = Timer()
     
-    
     @IBOutlet weak var blurEffectViewForWhite: UIVisualEffectView!
     @IBOutlet weak var blurEffectViewForBlack: UIVisualEffectView!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,7 +64,7 @@ class ViewController: UIViewController {
         var totalTime: Int
         
         // Default time 600s
-        if (inputOutlet.text != "" && (Int(inputOutlet.text!) != nil)) {
+        if inputOutlet.text != "" && (Int(inputOutlet.text!) != nil) {
             totalTime = Int(inputOutlet.text!)!
         } else {
             totalTime = 600
@@ -145,10 +143,11 @@ class ViewController: UIViewController {
         var minStr: String = "\(min)"
         var secStr: String = "\(sec)"
         
-        if (min < 10) {
+        if min < 10 {
             minStr = "0" + minStr
         }
-        if (sec < 10) {
+        
+        if sec < 10 {
             secStr = "0" + secStr
         }
 
@@ -157,10 +156,10 @@ class ViewController: UIViewController {
     
     func alert(title: String, text: String) {
         let msg = UIAlertController(title: title, message: text, preferredStyle: .alert)
-        let resetButton = UIAlertAction(title: "Reset", style: .default) {
-            UIAlertAction in
+        let resetButton = UIAlertAction(title: "Reset", style: .default) { _ in
             self.resetGame()
         }
+        
         msg.addAction(resetButton)
         self.present(msg, animated: true, completion: nil)
         

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EA7316271FED6F35009A318B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = EA7316261FED6F35009A318B /* .gitignore */; };
+		EA779485209841D5004F6705 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = EA779484209841D5004F6705 /* .swiftlint.yml */; };
 		EACF4D051FED25210027CF72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF4D041FED25210027CF72 /* AppDelegate.swift */; };
 		EACF4D071FED25210027CF72 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF4D061FED25210027CF72 /* ViewController.swift */; };
 		EACF4D0A1FED25210027CF72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EACF4D081FED25210027CF72 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		EA7316261FED6F35009A318B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		EA779484209841D5004F6705 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		EACF4D011FED25210027CF72 /* GameTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EACF4D041FED25210027CF72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EACF4D061FED25210027CF72 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +42,7 @@
 		EACF4CF81FED25210027CF72 = {
 			isa = PBXGroup;
 			children = (
+				EA779484209841D5004F6705 /* .swiftlint.yml */,
 				EA7316261FED6F35009A318B /* .gitignore */,
 				EACF4D031FED25210027CF72 /* GameTimer */,
 				EACF4D021FED25210027CF72 /* Products */,
@@ -77,6 +80,7 @@
 				EACF4CFD1FED25210027CF72 /* Sources */,
 				EACF4CFE1FED25210027CF72 /* Frameworks */,
 				EACF4CFF1FED25210027CF72 /* Resources */,
+				EA779483209840D6004F6705 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -126,6 +130,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA779485209841D5004F6705 /* .swiftlint.yml in Resources */,
 				EA7316271FED6F35009A318B /* .gitignore in Resources */,
 				EACF4D0F1FED25210027CF72 /* LaunchScreen.storyboard in Resources */,
 				EACF4D0C1FED25210027CF72 /* Assets.xcassets in Resources */,
@@ -134,6 +139,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EA779483209840D6004F6705 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EACF4CFD1FED25210027CF72 /* Sources */ = {
@@ -273,7 +294,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
